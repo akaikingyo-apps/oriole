@@ -1,0 +1,162 @@
+﻿
+
+module system.math
+{
+	class calculator
+	{
+		field sum;
+
+	    method add(a,b)
+		{
+			return this.sum = a + b;
+		}
+
+		method getsum()
+		{
+			return this.sum;
+		}
+
+		static method new()
+		{
+			<system.Console>::println("hello");
+			return new system.math.Calculator();
+		}
+	}
+
+	[test]:[main(0):1]
+	[calculator]:[f:sum][m:add(2):1][m:getsum(0):1]
+	
+	// global label catalog - method
+	1->	[m:add(2):1]
+	2->	[m:getsum(0):1]
+	// global label catalog - class
+	1-> [c:test]
+	2 ->[c:calculator]
+	// global label catalog - fields
+	1 ->[f:sum]
+
+	// global class catalog
+	2 -> [calculator,f:1->field1,m:1->offset1,2->offset2]
+		
+
+	class test
+	{
+		method main()
+		{
+			c = new calculator();
+
+			// new 1 (calculator)
+			// storev 1			
+
+			c.add(1,2);				
+
+			// loadv 1
+			// ldc.i 1
+			// ldc.i 2
+			// call 1 (add(2):1)
+
+			sum = c.sum;
+
+			// loadv 1
+			// loadf 1 (sum)
+			// storev 2
+
+			sum = c.getsum()
+			
+			// loadv 1
+			// call 2 (getsum(0):1)
+			// storev 2
+
+			a[1][2].b[2].do().c;
+
+			A.B.C.D
+			
+			load A
+			loadf B
+
+
+			[loadv a
+			load 1
+			loada]
+
+			[load 2
+			loada]
+			
+			[loadf b]
+			load 2
+			load a
+			call do
+			loadf c
+		}
+	}
+}
+
+class ClassInstance
+{
+	int classType;
+	object[] fields;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+extern library System;
+
+
+	method Main()
+	{
+		Println(Add(1,2));
+	}
+	
+	method Add(a,b)
+	{
+		return a + b;
+	}
+	
+
+.signature
+.version
+.method "Main" <n> <offset> <returntype> <narg>
+.method "Add" <n> <offset> <returntype="var"|"void"> <narg>
+.end
+<code>
+
+
+engine.addLibrary("System", new systemClass());
+engine.run("Program", "Main");
+
+call 1 -> engine must know method: offset, return value or not, number of arguments, number of local variables
+
+computation stack (store results, parameters and local variables)
+call stack (store return codep, stackp)
+
+stack:
+[arg1] <- newdatap <- (oldstackp - noarg)
+[arg2]
+[lv1]
+[lv2]  
+[retv] <- stackp
+
+callstack:
+[olddatap]
+[oldstackp - noarg]
+[retcodep]
+
+returns:
+
+stack:
+[retv]
+
+callstack:
+[]
